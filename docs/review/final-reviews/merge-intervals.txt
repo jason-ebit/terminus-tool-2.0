@@ -1,0 +1,618 @@
+TERMINAL-BENCH TASK REVIEW REPORT
+================================================================
+Overall state:     Review required (review_required)
+Policy profile:    T4 - Terminal-Bench 4.0 @ v4.0.0-22-g83c7a617 (83c7a6172d62)
+Profile status:    preview   requested: t4   actual: t4
+  Profiles are not interchangeable: the EC Terminus 3 programme forbids canary
+  strings and caps the agent timeout at 18000s; Terminal-Bench 4.0 requires the
+  canary and allows up to 28800s. A task compliant with one can fail the other.
+
+Legacy experimental score: 97/100 (reference only)
+  This figure is not a policy decision and is retained for comparison only.
+  Formula: static + rubric items only; advisory excluded; unknown and not_applicable excluded; satisfied = 1, partial = 0.5, missing/concern/fail = 0
+
+Static gate:        22 passed · 0 failed · 0 unknown · 0 not applicable   [deterministic]
+Rubric assessment:  32 satisfied · 1 partial · 1 concerns · 1 unknown · 0 not applicable   [model-assisted; cannot establish compliance]
+Reviewer advisory:  0 findings across 4 items   [display only; never scored]
+
+Confirmed failures (required static):   none
+Required unknowns (need evidence):      none
+Recommended static, unresolved:         none
+Rubric items flagged for review:        rubric-difficult, rubric-structured-data-schema, rubric-typos
+Low-confidence rubric items:            rubric-deterministic-reproducible, rubric-test-instruction-alignment, rubric-category-and-tags
+Human overrides:                        none
+
+HOW TO READ THIS
+  policy_fail        a required static rule failed. Nothing else can cancel it.
+  review_required    a required static rule is unknown, or rubric items need a
+                     human. Automatic approval is unavailable.
+  policy_pass        every required static rule passed and nothing is flagged.
+  profile_unverified the result would pass, but the selected profile is not yet
+                     approved, so it is not a policy decision.
+  unknown means the evidence was insufficient. It is never a confirmed failure.
+
+PROVENANCE
+  zip_name: merge-intervals.zip
+  zip_sha256: cd8a12f35d204257bb0f800cea0b0f1ce2fb138940ebf96ec602a8f683530689
+  checker_version: tb-review-2.5
+  profile_requested: t4
+  profile_actual: t4
+  profile_status: preview
+  policy_sha256: cc66a96b6082389e0c43cfefcc2b8f2944239f309f858373d15a5b0457f4cefd
+  source_manifest_sha256: 6c45c3c058ee60f41aebd75e15c4c21cf828c8a2cbeda35d57f9a17d8bf6646d
+  model_requested: qwen2.5:3b
+  model_actual: qwen2.5:3b
+  model_tag: 3b
+  model_digest: 357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b
+  prompt_version: t4-rubric-batch/2
+  prompt_template_sha256: 746fee7d56030b12719962184f2d0ada0f6618bea1dc42995124ad2ddd6dab85
+  assessment_mode: llm-assisted
+  llm_succeeded: True
+  fallback_reason: none
+  model_excerpts_limited: False
+  duration_sec: 53.99
+  completed_at: 2026-09-10T12:57:25.121341+00:00
+
+EXECUTION
+  Task code was not executed. Nothing from the uploaded archive was run, imported
+  or built. Under Terminus 4 the benchmark's own grep-based check scripts read an
+  extracted copy in a temporary directory; they do not execute task content.
+  Docker build, oracle, nop and agent trials were not performed.
+
+SUMMARY
+llm-assisted. Terminal-Bench 4.0 policy v4.0.0-22-g83c7a617. Provisional, not approval. 98% evidence coverage; 1 unresolved items. 35/35 rubric criteria resolved by the model. 
+
+ALL FINDINGS - UNRESOLVED FIRST
+
+1. [CONCERN] If structured output is expected, exact schema documented in instruction or spec file
+ID: rubric-structured-data-schema
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric; concern)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: No structured output is expected as no schema is documented in instruction.md or a clearly referenced spec file.
+Recommendation: Document the exact schema for any expected structured output in instruction.md or a spec file.
+
+2. [PARTIAL] No typos in filenames, paths, commands, or variable names
+ID: rubric-typos
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: No typos were found in critical identifiers across all task files (instruction.md, tests, solution, Dockerfile).
+Recommendation: Ensure all critical identifiers are free of typos, especially in Dockerfile and tests.
+
+3. [UNKNOWN] Genuinely hard for good reasons — requires professional experience or domain expertise
+ID: rubric-difficult
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 domain-grounded-task (split)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The task is described as a medium practice task with explicit edge cases, which may or may not require professional experience or domain expertise.
+Recommendation: Edit `merge-intervals/instruction.md`: Task difficulty is not definitively clear based on the provided information.
+
+4. [PASS] Allow internet
+ID: check-allow-internet
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 network-mode-intentional (modified)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All task.toml files allow internet access
+Recommendation: No edit needed in `task.toml`: No change needed for this check.
+
+5. [PASS] Canary
+ID: check-canary
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 no-canary-strings (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All files contain the required canary string
+Recommendation: No edit needed in `merge-intervals/instruction.md`: No change needed for this check.
+
+6. [PASS] Compose host binds
+ID: check-compose-host-binds
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 multi-container-metadata (modified)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: PASS tasks/merge-intervals
+Recommendation: No edit needed in `merge-intervals/instruction.md`: No change needed for this check.
+
+7. [PASS] Dockerfile platform
+ID: check-dockerfile-platform
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 no-platform-pinning (unchanged)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: check-dockerfile-platform.sh passed.
+Recommendation: No edit needed in `check-dockerfile-platform.sh`: No change needed for this check.
+
+8. [PASS] Dockerfile references
+ID: check-dockerfile-references
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: check-dockerfile-references.sh passed.
+Recommendation: No edit needed in `check-dockerfile-references.sh`: No change needed for this check.
+
+9. [PASS] Dockerfile sanity
+ID: check-dockerfile-sanity
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 dockerfile-best-practices (split)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: check-dockerfile-sanity.sh passed.
+Recommendation: No edit needed in `check-dockerfile-sanity.sh`: No change needed for this check.
+
+10. [PASS] Gpu types
+ID: check-gpu-types
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 no-gpu-requirement (removed)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All task.toml gpu_types values are canonical
+Recommendation: No edit needed in `task.toml`: No change needed for this check.
+
+11. [PASS] Instruction suffix
+ID: check-instruction-suffix
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All instruction.md files end with the canonical timeout/anti-cheat line
+Recommendation: No edit needed in `instruction.md`: No change needed for this check.
+
+12. [PASS] No allow internet true
+ID: check-no-allow-internet-true
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 network-mode-intentional (modified)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All task.toml files omit an explicit allow_internet = true
+Recommendation: No edit needed in `task.toml`: No change needed for this check.
+
+13. [PASS] Nproc
+ID: check-nproc
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 no-bare-nproc (unchanged)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All scripts avoid bare nproc
+Recommendation: No edit needed in `merge-intervals/instruction.md`: No change needed for this check.
+
+14. [PASS] Pip pinning
+ID: check-pip-pinning
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 docker-package-installs-pinned (split); T3 dependencies-declared (modified)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All pip / uv pip / uvx --with installs are pinned
+Recommendation: No edit needed in `merge-intervals/instruction.md`: No change needed for this check.
+
+15. [PASS] Pytest version
+ID: check-pytest-version
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 docker-package-installs-pinned (split)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: PASS
+Recommendation: No edit needed in `merge-intervals/instruction.md`: No change needed for this check.
+
+16. [PASS] Separate verifier
+ID: check-separate-verifier
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 verifier-isolation (merged); T3 top-level-artifacts-configured (merged); T3 tests-dockerfile-present (merged); T3 docker-environment-present (unchanged); T3 required-task-files-present (modified)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All tasks are configured for separate verifier mode
+Recommendation: No edit needed in `merge-intervals/instruction.md`: No change needed for this check.
+
+17. [PASS] Task absolute path
+ID: check-task-absolute-path
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: check-task-absolute-path.sh passed.
+Recommendation: No edit needed in `check-task-absolute-path.sh`: No change needed for this check.
+
+18. [PASS] Task fields
+ID: check-task-fields
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 task-toml-required-metadata-present (modified); T3 open-category (unchanged); T3 taxonomy-alignment (modified); T3 required-task-files-present (modified); T3 starter-template-replaced (modified)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All task.toml files contain required fields and README sections with valid values
+Recommendation: No edit needed in `task.toml`: No change needed for this check.
+
+19. [PASS] Task package name
+ID: check-task-package-name
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 terminus-3-project-target (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: PASS tasks/merge-intervals
+All task.toml files have the expected [task] name
+Recommendation: No edit needed in `task.toml`: No change needed for this check.
+
+20. [PASS] Task slug
+ID: check-task-slug
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: PASS tasks/merge-intervals (2 tokens)
+Recommendation: No edit needed in `merge-intervals/instruction.md`: No change needed for this check.
+
+21. [PASS] Task timeout
+ID: check-task-timeout
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 agent-timeout-range (modified)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All task.toml timeouts are within the 28800-second (8h) cap
+Recommendation: No edit needed in `task.toml`: No change needed for this check.
+
+22. [PASS] Test file references
+ID: check-test-file-references
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: check-test-file-references.sh passed.
+Recommendation: No edit needed in `check-test-file-references.sh`: No change needed for this check.
+
+23. [PASS] Test sh sanity
+ID: check-test-sh-sanity
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 test-sh-entrypoint-canonical (split)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: check-test-sh-sanity.sh passed.
+Recommendation: No edit needed in `check-test-sh-sanity.sh`: No change needed for this check.
+
+24. [PASS] Trial network fetch
+ID: check-trial-network-fetch
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 no-hidden-external-dependency (split)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: No external trial-time fetches in tests/test.sh
+Recommendation: No edit needed in `tests/test.sh`: No change needed for this check.
+
+25. [PASS] Verifier tooling baked
+ID: check-verifier-tooling-baked
+Layer: static   severity: required   category: Harbor Static Checks
+Assessment source: harbor static check
+Lineage: T3 dependencies-declared (modified)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All separate-verifier tasks bake their verifier tooling into the image
+Recommendation: No edit needed in `merge-intervals/instruction.md`: No change needed for this check.
+
+26. [SATISFIED] Verifier is reliable, deterministic, and efficient
+ID: rubric-verifiable
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: Verifier is reliable, deterministic, and efficient as evidenced by the separate verifier configuration and the absence of runtime network installs.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Verifier is reliable, deterministic, and efficient.
+
+27. [SATISFIED] Solution demonstrates the task is solvable within time and resource constraints
+ID: rubric-solvable
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 oracle-solution-present (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: A working solution is provided in the solution/solve.sh file, which passes all tests and could reasonably be implemented by an expert in a few hours.
+Recommendation: No edit needed in `solution/solve.sh`: Solution demonstrates the task is solvable within time and resource constraints.
+
+28. [SATISFIED] Real-world value — someone could get paid to do this
+ID: rubric-interesting
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 domain-grounded-task (split)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The task represents a realistic problem someone would encounter professionally, even for a niche audience, as it involves a small Python function and explicit edge cases.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Task represents a realistic problem someone would encounter professionally.
+
+29. [SATISFIED] Tests grade outcomes, not process — instructions describe end state, not steps
+ID: rubric-outcome-verified
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: Tests call the exported function and check the stated cases, verifying the end result and instructions describe what to achieve, not how.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Tests verify the end result and instructions describe what to achieve, not how.
+
+30. [SATISFIED] Tests resist adversarial agent behavior
+ID: rubric-anti-cheat-robustness
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 no-agent-writable-ground-truth (replaced); T3 no-unrebuilt-binary-grading (replaced); T3 no-hidden-instructions-or-ai-scaffolding (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: Tests resist adversarial shortcuts agents commonly attempt by ensuring the agent does not have access to `/tests/` or `/solution/` at runtime.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Tests resist adversarial shortcuts agents commonly attempt.
+
+31. [SATISFIED] Task contains no malicious code, credential exfiltration, or exploitation of the agent or host
+ID: rubric-task-security
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All task files are free of malicious behavior, credential exfiltration, and exploitation of the agent or host.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: No security issues found.
+
+32. [SATISFIED] Tests verify actual behavior through execution, not source code keywords or string patterns
+ID: rubric-functional-verification
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 semantic-verifier-present (replaced); T3 no-proxy-only-checks (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: Tests verify actual behavior by executing code and checking outputs, not by scanning source files for keywords or string patterns.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Tests are functional and verify actual behavior.
+
+33. [SATISFIED] Consistent results across runs with pinned dependencies and no live service dependencies
+ID: rubric-deterministic-reproducible
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 deterministic-tests (replaced); T3 no-hidden-external-dependency (split)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: Dependencies are pinned, no live services are required, and results are consistent across runs.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Dependencies are pinned and no live services are required, ensuring consistent results.
+
+34. [SATISFIED] Difficulty stems from logical reasoning, not formatting minutiae or arbitrary precision
+ID: rubric-essential-difficulty
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 not-trivial-or-pure-formatting (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The task requires genuine reasoning and does not rely on formatting minutiae or arbitrary precision.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The task requires genuine reasoning and is not overly focused on formatting or precision.
+
+35. [SATISFIED] All behavior checked in tests is described in the instruction, and all behavior described in the instruction is checked in tests
+ID: rubric-test-instruction-alignment
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: Every test assertion traces back to a requirement in the instruction and every instruction requirement is tested.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Tests align with the instruction and cover all specified requirements.
+
+36. [SATISFIED] Not solvable through training corpus memorization
+ID: rubric-novel
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The task involves a novel combination of skills and does not rely on standard textbook exercises or well-known problems.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The task is novel and requires genuine exploration and reasoning.
+
+37. [SATISFIED] Requires multi-step terminal interaction, not solvable by a single LLM call
+ID: rubric-agentic
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The task requires multi-step interaction with the environment, including fixing a Python function and verifying its correctness.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The task is satisfied as it requires the agent to interact with the environment over multiple steps.
+
+38. [SATISFIED] Non-specialist reviewers can verify task correctness, or sufficient explanation is provided
+ID: rubric-reviewable
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 reviewer-checklist-ready (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The task is provided with sufficient explanation and artifacts, allowing a non-specialist reviewer to verify correctness.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The task is provided with sufficient explanation and artifacts for a non-specialist reviewer to verify correctness.
+
+39. [SATISFIED] Human-written, concise, uses absolute paths, no unnecessary headings, no fluff
+ID: rubric-instruction-concision
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 instruction-file-clear (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The instruction is concise and uses absolute paths, without unnecessary headings or fluff.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The instruction is concise and uses absolute paths, without unnecessary headings or fluff.
+
+40. [SATISFIED] Solution demonstrates actual computation, not hardcoded answers
+ID: rubric-solution-quality
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 oracle-solution-correct (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The solution demonstrates a sequence of commands that derive the answer through actual computation.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The solution demonstrates a sequence of commands that derive the answer through actual computation.
+
+41. [SATISFIED] Verifier inputs are sufficient and runtime tooling is pre-installed in the verifier image
+ID: rubric-separate-verifier-configured
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The verifier inputs are sufficient and runtime tooling is pre-installed in the verifier image.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The verifier inputs are sufficient and runtime tooling is pre-installed in the verifier image.
+
+42. [SATISFIED] Agent image clean (no tests/solution/test-only deps); verifier image owns its own deps; proper apt cleanup
+ID: rubric-environment-hygiene
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 dockerfile-best-practices (split)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The agent image is clean (no tests/solution/test-only deps); the verifier image owns its own deps; proper apt cleanup is done.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The agent image is clean (no tests/solution/test-only deps); the verifier image owns its own deps; proper apt cleanup is done.
+
+43. [SATISFIED] Difficulty explanation clearly describes the core challenge for both agents and humans
+ID: rubric-difficulty-explanation-quality
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 difficulty-tier-evidence (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The difficulty explanation clearly describes the core challenge for both agents and humans.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The difficulty explanation is clear and relevant to the task.
+
+44. [SATISFIED] Solution explanation summarizes the approach and key insights, or justifies absence of solution
+ID: rubric-solution-explanation-quality
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The solution explanation summarizes the approach and key insights, or justifies absence of solution.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The solution explanation is clear and relevant to the task.
+
+45. [SATISFIED] Verification explanation clearly describes how tests verify correctness
+ID: rubric-verification-explanation-quality
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 tolerance-and-tie-breaks-tested (modified); T3 rubric-or-evaluation-notes-present (replaced); T3 performance-threshold-not-too-tight (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The verification explanation clearly describes how tests verify correctness.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The verification explanation is clear and relevant to the task.
+
+46. [SATISFIED] Category, subcategory, and tags are meaningful and relevant to the task
+ID: rubric-category-and-tags
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 starter-template-replaced (modified)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: The category and subcategory accurately reflect the task domain and tags are specific and relevant.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: The category and tags are specific and relevant to the task.
+
+47. [SATISFIED] Task folder name is meaningful, descriptive, concise, and follows naming conventions
+ID: rubric-task-name
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: merge-intervals
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Task folder name is descriptive and concise.
+
+48. [SATISFIED] Timeouts and resource limits are appropriate for the task
+ID: rubric-resource-configuration
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: verifier timeout_sec = 120.0, agent timeout_sec = 28800.0, build_timeout_sec = 600.0, cpus = 1, memory_mb = 2048, storage_mb = 10240, gpus = 0
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Resource limits are appropriate for the task.
+
+49. [SATISFIED] If present, README.md provides useful development context for reviewers
+ID: rubric-task-readme
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: README.md provides useful context not found elsewhere.
+Recommendation: README.md provides useful development context for reviewers.
+
+50. [SATISFIED] Expert time estimate is provided and plausible for the task
+ID: rubric-expert-time-estimate
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: expert_time_estimate_hours = 0.5
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Expert time estimate is provided and plausible for the task.
+
+51. [SATISFIED] task.toml contains only valid fields — no extra or invented fields in any section
+ID: rubric-task-toml-schema
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: task.toml contains only valid fields recognized by Harbor.
+Recommendation: task.toml contains only valid fields recognized by Harbor.
+
+52. [SATISFIED] Task directory contains only files needed to build, run, solve, or verify the task — no leftover or unused files
+ID: rubric-no-extraneous-files
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 submission-zip-clean (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: Task directory contains only files needed to build, run, solve, or verify the task.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Task directory contains only files needed to build, run, solve, or verify the task.
+
+53. [SATISFIED] Artifacts ship only agent-produced content; build-time-fixed data is baked into the verifier image; collect hooks capture and fail safely
+ID: rubric-artifact-efficiency
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: artifacts = ["/app/app.py"] in merge-intervals/task.toml
+Recommendation: No edit needed in `/app/app.py`: No artifacts are transferred, only the agent-produced content is shipped.
+
+54. [SATISFIED] Verifiers that execute agent-produced code run it unprivileged and keep the reward channel out of its reach
+ID: rubric-verifier-execution-isolation
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: setpriv --reuid nobody --regid nogroup --clear-groups --no-new-privs in merge-intervals/tests/test.sh
+Recommendation: No edit needed in `merge-intervals/tests/test.sh`: The verifier runs the agent's code as an unprivileged user.
+
+55. [SATISFIED] Verifiers with discrete test cases emit a per-test CTRF report to /logs/verifier/ctrf.json
+ID: rubric-ctrf-reporting
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 test-sh-entrypoint-canonical (split)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: python3 -m pytest --ctrf /logs/verifier/ctrf.json /tests/test_outputs.py -rA in merge-intervals/tests/test.sh
+Recommendation: No edit needed in `/logs/verifier/ctrf.json`: CTR report is emitted per test case.
+
+56. [SATISFIED] Instruction constraints that forbid modifying (or require preserving) a concrete artifact are actually enforced — an agent that violates one fails verification
+ID: rubric-do-not-modify-enforced
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: merge-intervals/instruction.md: 'do not modify, do not change, must not edit, leave unchanged/intact/as-is'
+Recommendation: No edit needed in `merge-intervals/instruction.md`: Violation of the constraint is caught and fails the verification.
+
+57. [SATISFIED] The verifier writes a binary reward — exactly 0 or 1 on every reachable path, never partial credit
+ID: rubric-binary-reward
+Layer: rubric   severity: required   category: Implementation Rubric
+Assessment source: LLM (rubric)
+Lineage: T3 test-sh-entrypoint-canonical (split); T3 reward-file-zero-on-failure (replaced)
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: echo 0 > /logs/verifier/reward.txt in merge-intervals/tests/test.sh
+Recommendation: No edit needed in `/logs/verifier/reward.txt`: The verifier writes a binary reward of 0 or 1 on every reachable path.
+
+58. [SATISFIED] Task text files use LF line endings
+ID: submission-line-endings
+Layer: advisory   severity: recommended   category: Submission
+Assessment source: legacy scan
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: All task text files use LF line endings.
+Recommendation: No edit needed in `merge-intervals/instruction.md`: No change needed.
+
+59. [SATISFIED] Task does not require privileged Docker or unsafe container flags
+ID: no-privileged-docker-ops
+Layer: advisory   severity: required   category: Environment
+Assessment source: objective file/term scan
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: No privileged Docker flags found in readable files.
+Recommendation: No edit needed in `merge-intervals/environment/app.py`: No action needed.
+
+60. [SATISFIED] Environment files contain no hidden instructions, solution hints, or AI-framework scaffolding
+ID: no-hidden-instructions-or-ai-scaffolding
+Layer: advisory   severity: required   category: Environment
+Assessment source: objective file/term scan
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: No hidden instruction or AI-scaffolding markers found.
+Recommendation: No edit needed in `merge-intervals/environment/app.py`: No action needed.
+
+61. [SATISFIED] Ground truth is not read from paths the agent can modify
+ID: no-agent-writable-ground-truth
+Layer: advisory   severity: required   category: Verifier
+Assessment source: objective file/term scan
+Lineage: none recorded
+Applies when: All Terminal-Bench 4.0 task submissions.
+Evidence: No obvious agent-writable ground-truth path found.
+Recommendation: No edit needed in `merge-intervals/tests/Dockerfile`: No action needed.
+
+END OF REPORT
+Exported on request. Full ZIP contents and raw model prompts are not included.

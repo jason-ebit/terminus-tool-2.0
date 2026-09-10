@@ -1,0 +1,497 @@
+{
+  "checklist": {
+    "title": "Terminus Task ZIP Checklist",
+    "items": [
+      {
+        "id": "open-category",
+        "category": "Category Status",
+        "criterion": "Task category is one of the currently open categories: Science, Software, ML, Operations, Security, Hardware, Media",
+        "why_it_matters": "The category-status page says all listed Terminus 3 categories are open for new submissions.",
+        "how_to_check": "Inspect task configuration, README, or instructions for a category value and confirm it matches one of the open categories.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-milestone-task",
+        "category": "Category Status",
+        "criterion": "Task is not a milestone task",
+        "why_it_matters": "The category-status page says milestone tasks are not part of this edition.",
+        "how_to_check": "Search file names and task text for milestone-task framing or milestone-specific submission language.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-gpu-requirement",
+        "category": "Category Status",
+        "criterion": "Task does not require a GPU",
+        "why_it_matters": "The category-status page says GPU tasks are not allowed, though CPU-simulated or compile-only kernel work can be authorable.",
+        "how_to_check": "Inspect Docker, dependency, and instruction files for required CUDA, GPU hardware, or GPU-only execution assumptions.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-canary-strings",
+        "category": "Category Status",
+        "criterion": "Task components exclude canary strings",
+        "why_it_matters": "The category-status page says canary strings are excluded from all components.",
+        "how_to_check": "Search all text files for canary-string markers or instructions that identify hidden canaries.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "verifier-isolation",
+        "category": "Structure",
+        "criterion": "Verifier isolation is configured with environment_mode = \"separate\"",
+        "why_it_matters": "The category-status page says verifier isolation is required.",
+        "how_to_check": "Search configuration files for environment_mode and verify the value is \"separate\".",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "top-level-artifacts-configured",
+        "category": "Structure",
+        "criterion": "Verifier artifacts are declared as a top-level task.toml key",
+        "why_it_matters": "CI guidance warns that artifacts nested under [verifier] are silently dropped, so the verifier receives nothing.",
+        "how_to_check": "Inspect task.toml and confirm artifacts is declared at the top level, not inside [verifier].",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "task-toml-required-metadata-present",
+        "category": "Structure",
+        "criterion": "task.toml contains required Terminus 3 metadata and explanation fields",
+        "why_it_matters": "Task Components and CI docs require Terminus 3 metadata fields for packaging, taxonomy, rubric, and review context.",
+        "how_to_check": "Inspect task.toml for [metadata], category, subcategory, tags, difficulty, expert_time_estimate_hours, and explanation fields.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "agent-timeout-range",
+        "category": "Structure",
+        "criterion": "Agent timeout is between 1800 and 18000 seconds",
+        "why_it_matters": "The category-status page gives 1800 seconds as the minimum and 18000 seconds as the ceiling.",
+        "how_to_check": "Search configuration files for timeout fields and confirm the agent timeout is within the allowed range.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "network-mode-intentional",
+        "category": "Structure",
+        "criterion": "Internet access is intentionally configured as network_mode = \"public\" or \"no-network\"",
+        "why_it_matters": "The category-status page says public networking is the default and no-network is used when a task should run offline.",
+        "how_to_check": "Search configuration files for network_mode and confirm the setting matches the task's intended online or offline behavior.",
+        "severity": "recommended",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "terminus-3-project-target",
+        "category": "Setup",
+        "criterion": "Submission targets the Terminus-3-Prod project",
+        "why_it_matters": "The quick-start and CLI docs identify Terminus-3-Prod as the project for task submission.",
+        "how_to_check": "Inspect README, submission notes, or CLI metadata for Terminus-3-Prod.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "manual"
+      },
+      {
+        "id": "starter-template-replaced",
+        "category": "Structure",
+        "criterion": "Starter-template placeholders such as REPLACE are removed",
+        "why_it_matters": "The platform submission docs describe the skeleton as a starter that must be renamed and filled in.",
+        "how_to_check": "Search all readable files for REPLACE, TODO, placeholder task names, or unchanged skeleton language.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "required-task-files-present",
+        "category": "Structure",
+        "criterion": "Required task files and directories are present",
+        "why_it_matters": "Task component docs define the expected task package structure.",
+        "how_to_check": "Inspect the ZIP for task configuration, instructions, Docker/environment files, oracle/reference solution, and verifier/test files.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "tests-dockerfile-present",
+        "category": "Structure",
+        "criterion": "tests/Dockerfile is included for the separate verifier image",
+        "why_it_matters": "Terminus 3 runs the verifier in a separate container built from tests/Dockerfile.",
+        "how_to_check": "Inspect the ZIP file list for tests/Dockerfile.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "test-sh-entrypoint-canonical",
+        "category": "Verifier",
+        "criterion": "tests/test.sh follows the canonical verifier entrypoint behavior",
+        "why_it_matters": "Platform submission docs say tests/test.sh is the canonical verifier entrypoint and should write reward output rather than exiting early.",
+        "how_to_check": "Inspect tests/test.sh for reward.txt handling, exit 0 at the end, and absence of set -e.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "instruction-file-clear",
+        "category": "Quality",
+        "criterion": "Task instructions clearly state the goal, constraints, and expected deliverable",
+        "why_it_matters": "Task quality docs emphasize clear instructions and unambiguous success criteria.",
+        "how_to_check": "Read instruction.md or README and confirm it explains what the agent must do, what constraints apply, and what output/state is expected.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "domain-grounded-task",
+        "category": "Quality",
+        "criterion": "Task is domain-grounded and targets a genuinely difficult coding-agent workflow",
+        "why_it_matters": "The welcome and quality docs define Terminus 3 as expert-authored, domain-grounded coding-agent evaluation.",
+        "how_to_check": "Read instructions and included files to verify the task requires specialized domain understanding and concrete system manipulation.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "not-trivial-or-pure-formatting",
+        "category": "Quality",
+        "criterion": "Task is not a trivial formatting, search, or boilerplate edit",
+        "why_it_matters": "Difficulty and quality docs expect tasks that challenge frontier coding agents.",
+        "how_to_check": "Assess whether solving requires multi-step reasoning, implementation, debugging, or domain-specific changes rather than simple text edits.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "difficulty-tier-evidence",
+        "category": "Quality",
+        "criterion": "Task includes evidence or rationale for its expected difficulty tier",
+        "why_it_matters": "Difficulty docs define tiers based on empirical agent pass rates and near-miss patterns.",
+        "how_to_check": "Inspect README, metadata, or author notes for difficulty rationale, expected failure modes, or validation notes.",
+        "severity": "recommended",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "manual"
+      },
+      {
+        "id": "taxonomy-alignment",
+        "category": "Quality",
+        "criterion": "Task category, subcategory, and tags align with the Terminus taxonomy",
+        "why_it_matters": "Task taxonomy docs define the accepted categories and subcategory framing.",
+        "how_to_check": "Compare task metadata and instructions with the taxonomy docs and confirm the chosen category is coherent.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "oracle-solution-present",
+        "category": "Oracle Solution",
+        "criterion": "An oracle or reference solution is included",
+        "why_it_matters": "Creating-task docs list writing oracle solutions as part of task authoring.",
+        "how_to_check": "Inspect the ZIP for solution files or documentation that demonstrate correct task completion.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "oracle-solution-correct",
+        "category": "Oracle Solution",
+        "criterion": "Oracle solution represents a correct solution, not merely a passing artifact",
+        "why_it_matters": "Oracle-solution docs warn that a passing oracle does not itself prove correctness.",
+        "how_to_check": "Read the oracle and tests to confirm the reference implements the intended semantics and is not tailored only to visible checks.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "semantic-verifier-present",
+        "category": "Verifier",
+        "criterion": "Verifier or test files check semantics rather than appearance",
+        "why_it_matters": "Testing docs say verifiers should check meaningful task outcomes, not superficial formatting.",
+        "how_to_check": "Inspect tests/verifier files and confirm they validate semantic behavior or final state.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "rejects-wrong-solution",
+        "category": "Verifier",
+        "criterion": "Verifier rejects at least one deliberately wrong or shortcut solution",
+        "why_it_matters": "CI feedback and writing-tests docs emphasize rejecting wrong solutions, not only accepting the oracle.",
+        "how_to_check": "Look for negative tests, wrong-solution notes, or local validation evidence that a bad solution fails.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-agent-writable-ground-truth",
+        "category": "Verifier",
+        "criterion": "Ground truth is not read from paths the agent can modify",
+        "why_it_matters": "Writing-tests guidance warns against agent-writable ground truth and staging leaks.",
+        "how_to_check": "Inspect verifier/test paths and fixtures to ensure expected answers are fixed outside agent-controlled outputs.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-proxy-only-checks",
+        "category": "Verifier",
+        "criterion": "Verifier does not rely only on proxy checks such as file existence or unchanged strings",
+        "why_it_matters": "Testing docs warn that proxy checks can accept shortcuts without validating correctness.",
+        "how_to_check": "Inspect assertions to confirm they validate computed behavior, content semantics, or system state.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-unrebuilt-binary-grading",
+        "category": "Verifier",
+        "criterion": "Verifier does not grade an old or unrebuilt binary/artifact",
+        "why_it_matters": "Writing-tests docs warn against grading stale artifacts instead of the agent's changed work.",
+        "how_to_check": "Check test setup/build commands to confirm tests rebuild or run against the submitted workspace.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "tolerance-and-tie-breaks-tested",
+        "category": "Verifier",
+        "criterion": "Verifier covers tolerances, optimization objectives, and tie-break behavior when relevant",
+        "why_it_matters": "Recent guidance calls out tolerance drift and untested objectives as review risks.",
+        "how_to_check": "Inspect tests for edge cases, numeric tolerances, objective comparisons, or tie-break assertions relevant to the task.",
+        "severity": "recommended",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "deterministic-tests",
+        "category": "Testing",
+        "criterion": "Tests are deterministic and do not rely on flaky timing, randomness, or external state",
+        "why_it_matters": "CI and validation docs require reliable automated evaluation.",
+        "how_to_check": "Inspect tests for uncontrolled randomness, timeouts, network dependencies, or environment-sensitive assumptions.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "local-validation-documented",
+        "category": "Testing",
+        "criterion": "Local validation or CI feedback has been run and documented",
+        "why_it_matters": "Submission and CI training docs instruct authors to validate before submission.",
+        "how_to_check": "Look for README notes, logs, or checklist evidence that local validation, oracle, NOP, or CI-style checks were run.",
+        "severity": "recommended",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "manual"
+      },
+      {
+        "id": "docker-environment-present",
+        "category": "Environment",
+        "criterion": "Docker/environment setup is included and suitable for the task",
+        "why_it_matters": "Docker environment docs describe containerized task execution as part of the workflow.",
+        "how_to_check": "Inspect Dockerfile, environment config, dependency files, and setup scripts.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "dockerfile-best-practices",
+        "category": "Environment",
+        "criterion": "Dockerfile follows documented requirements and avoids unnecessary heavyweight setup",
+        "why_it_matters": "Dockerfile requirements docs describe packaging expectations for reproducible environments.",
+        "how_to_check": "Inspect Dockerfile for pinned/base image choices, install steps, cache behavior, and unnecessary services.",
+        "severity": "recommended",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "docker-base-images-digest-pinned",
+        "category": "Environment",
+        "criterion": "Dockerfile FROM images are digest-pinned",
+        "why_it_matters": "Platform and Dockerfile docs require digest-pinned base images for reproducible task environments.",
+        "how_to_check": "Inspect every Dockerfile FROM line and confirm it uses an @sha256 digest.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "docker-package-installs-pinned",
+        "category": "Environment",
+        "criterion": "Python package installs in Docker/test scripts pin exact versions",
+        "why_it_matters": "CI guidance says unpinned pip, uv pip, and uvx --with installs can drift after the task is authored.",
+        "how_to_check": "Inspect Dockerfiles and test scripts for pip/uv installs and confirm package versions are pinned with ==.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-platform-pinning",
+        "category": "Environment",
+        "criterion": "Dockerfiles do not pin a CPU architecture with FROM --platform",
+        "why_it_matters": "CI guidance says tasks should be portable across architectures and must not pin Docker build platform.",
+        "how_to_check": "Search Dockerfiles for FROM --platform.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-bare-nproc",
+        "category": "Environment",
+        "criterion": "Dockerfiles and scripts do not call bare nproc for parallelism",
+        "why_it_matters": "CI guidance warns that bare nproc can read host CPU count and over-parallelize inside constrained containers.",
+        "how_to_check": "Search Dockerfiles, tests/test.sh, and solution scripts for nproc usage.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-privileged-docker-ops",
+        "category": "Environment",
+        "criterion": "Task does not require privileged Docker or unsafe container flags",
+        "why_it_matters": "Quality guidelines say Terminus tasks must not require root-level privileges or unsafe Docker settings like --privileged.",
+        "how_to_check": "Search compose files, task.toml, Docker scripts, and instructions for --privileged, privileged: true, or unsafe docker_flags.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "dependencies-declared",
+        "category": "Environment",
+        "criterion": "Runtime and test dependencies are declared in files included in the ZIP",
+        "why_it_matters": "Environment setup docs require dependencies to be reproducible inside the container.",
+        "how_to_check": "Look for pyproject.toml, requirements.txt, package.json, lockfiles, environment files, or Docker install commands.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-hidden-instructions-or-ai-scaffolding",
+        "category": "Environment",
+        "criterion": "Environment files do not contain hidden instructions, solution hints, or AI-framework scaffolding",
+        "why_it_matters": "Reviewer checklist and changelog guidance call out hidden environment hints and files such as CLAUDE.md or skills.md as high-severity cleanup issues.",
+        "how_to_check": "Search the ZIP for CLAUDE.md, skills.md, AGENTS.md, hidden instruction files, walkthroughs, or solution-guide language.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-hidden-external-dependency",
+        "category": "Environment",
+        "criterion": "Task does not depend on hidden local files, private services, or undeclared external resources",
+        "why_it_matters": "Validation docs require tasks to run in the provided environment.",
+        "how_to_check": "Search instructions, tests, and config for absolute local paths, private URLs, missing datasets, or secret requirements.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "submission-zip-clean",
+        "category": "Submission",
+        "criterion": "ZIP contains only relevant task files and excludes caches, build artifacts, and local secrets",
+        "why_it_matters": "Submission checklist docs expect clean upload packages.",
+        "how_to_check": "Inspect file list for __pycache__, .pytest_cache, .git, node_modules, secrets, credentials, large generated artifacts, or editor junk.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "no-direct-reviewer-contact",
+        "category": "Review",
+        "criterion": "Task materials do not instruct contributors to contact reviewers directly",
+        "why_it_matters": "The portal banner warns that messaging reviewers will not speed review.",
+        "how_to_check": "Search instructions and README for reviewer-contact language or private escalation instructions.",
+        "severity": "recommended",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "manual"
+      },
+      {
+        "id": "reviewer-checklist-ready",
+        "category": "Review",
+        "criterion": "Task is ready for reviewer checklist inspection",
+        "why_it_matters": "Reviewer docs describe common errors and checklist-based review expectations.",
+        "how_to_check": "Confirm instructions, config, oracle, tests, environment, and submission notes are internally consistent before upload.",
+        "severity": "required",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "auto"
+      },
+      {
+        "id": "rubric-or-evaluation-notes-present",
+        "category": "Review",
+        "criterion": "Rubric or evaluation notes are present when the task requires nuanced judgment",
+        "why_it_matters": "Rubrics and review docs help reviewers understand intended pass/fail boundaries.",
+        "how_to_check": "Look for rubric, README, or task notes explaining acceptance criteria and edge cases.",
+        "severity": "recommended",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "manual"
+      },
+      {
+        "id": "faq-troubleshooting-considered",
+        "category": "Reference",
+        "criterion": "Known FAQ/troubleshooting issues are addressed in task docs or setup",
+        "why_it_matters": "Reference docs collect common setup and submission issues.",
+        "how_to_check": "Inspect README and setup notes for Docker, CLI, dependency, timeout, or platform-submission gotchas relevant to the task.",
+        "severity": "recommended",
+        "applies_when": "All Terminus 3 task submissions.",
+        "review_mode": "manual"
+      },
+      {
+        "id": "kernel-cpu-simulated-or-compile-only",
+        "category": "Category Specific",
+        "criterion": "Kernel or accelerator tasks are CPU-simulated or compile-only",
+        "why_it_matters": "The taxonomy says Kernels tasks are in scope only when they do not require GPU execution.",
+        "how_to_check": "If the task is a Kernels task, inspect instructions, Dockerfile, and tests for CPU simulation or compile-only validation.",
+        "severity": "required",
+        "applies_when": "Only when category/subcategory is Kernels or accelerator/kernel work is mentioned.",
+        "review_mode": "manual"
+      },
+      {
+        "id": "multi-container-metadata",
+        "category": "Policy",
+        "criterion": "Multi-container tasks are tagged under metadata",
+        "why_it_matters": "Quality guidelines say tasks that run multiple containers must be tagged under metadata in task.toml.",
+        "how_to_check": "If the ZIP defines multiple services or containers, inspect task.toml for appropriate metadata tags.",
+        "severity": "required",
+        "applies_when": "Only when the task uses multiple containers or service definitions.",
+        "review_mode": "manual"
+      },
+      {
+        "id": "performance-threshold-not-too-tight",
+        "category": "Policy",
+        "criterion": "Performance thresholds are not set too tightly relative to the oracle",
+        "why_it_matters": "Quality guidelines warn against thresholds so tight they require replicating the oracle.",
+        "how_to_check": "If the task grades performance, inspect verifier thresholds and oracle notes for reasonable slack.",
+        "severity": "required",
+        "applies_when": "Only when verifier grades performance, speed, latency, throughput, or optimization quality.",
+        "review_mode": "manual"
+      },
+      {
+        "id": "reward-file-zero-on-failure",
+        "category": "Policy",
+        "criterion": "Failed agent runs write 0 to the reward file",
+        "why_it_matters": "Quality guidelines say failed agent runs must write 0 to the reward file instead of exiting first.",
+        "how_to_check": "If the task uses a reward file, inspect test.sh or verifier logic for failure-path reward writing.",
+        "severity": "required",
+        "applies_when": "Only when the task uses a reward file.",
+        "review_mode": "manual"
+      },
+      {
+        "id": "env-vars-have-defaults",
+        "category": "Policy",
+        "criterion": "Environment variables used in test.sh have compatible defaults",
+        "why_it_matters": "Quality guidelines require environment variables in test.sh to have defaults compatible with the task structure.",
+        "how_to_check": "If test.sh uses environment variables, inspect default assignments and fallback values.",
+        "severity": "required",
+        "applies_when": "Only when test.sh or verifier scripts use environment variables.",
+        "review_mode": "manual"
+      }
+    ]
+  }
+}

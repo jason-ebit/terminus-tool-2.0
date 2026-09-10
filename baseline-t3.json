@@ -1,0 +1,86 @@
+{
+  "captured_at": "2026-09-09T10:37:26.488798+00:00",
+  "checker_version": "tb-review-2.3",
+  "profile": "t3",
+  "profile_label": "Snorkel EC Terminus 3 (training dataset; canary forbidden, timeout 1800-18000)",
+  "checklist_sha256": "2401f7e6d1d233865b1882a9b44147d38d4c63746323da26f35a010104608ab3",
+  "item_count": 49,
+  "severity_counts": {
+    "recommended": 8,
+    "required": 41
+  },
+  "review_mode_counts": {
+    "auto": 38,
+    "manual": 11
+  },
+  "item_ids": [
+    "open-category",
+    "no-milestone-task",
+    "no-gpu-requirement",
+    "no-canary-strings",
+    "verifier-isolation",
+    "top-level-artifacts-configured",
+    "task-toml-required-metadata-present",
+    "agent-timeout-range",
+    "network-mode-intentional",
+    "terminus-3-project-target",
+    "starter-template-replaced",
+    "required-task-files-present",
+    "tests-dockerfile-present",
+    "test-sh-entrypoint-canonical",
+    "instruction-file-clear",
+    "domain-grounded-task",
+    "not-trivial-or-pure-formatting",
+    "difficulty-tier-evidence",
+    "taxonomy-alignment",
+    "oracle-solution-present",
+    "oracle-solution-correct",
+    "semantic-verifier-present",
+    "rejects-wrong-solution",
+    "no-agent-writable-ground-truth",
+    "no-proxy-only-checks",
+    "no-unrebuilt-binary-grading",
+    "tolerance-and-tie-breaks-tested",
+    "deterministic-tests",
+    "local-validation-documented",
+    "docker-environment-present",
+    "dockerfile-best-practices",
+    "docker-base-images-digest-pinned",
+    "docker-package-installs-pinned",
+    "no-platform-pinning",
+    "no-bare-nproc",
+    "no-privileged-docker-ops",
+    "dependencies-declared",
+    "no-hidden-instructions-or-ai-scaffolding",
+    "no-hidden-external-dependency",
+    "submission-zip-clean",
+    "no-direct-reviewer-contact",
+    "reviewer-checklist-ready",
+    "rubric-or-evaluation-notes-present",
+    "faq-troubleshooting-considered",
+    "kernel-cpu-simulated-or-compile-only",
+    "multi-container-metadata",
+    "performance-threshold-not-too-tight",
+    "reward-file-zero-on-failure",
+    "env-vars-have-defaults"
+  ],
+  "scoring": {
+    "weights": {
+      "satisfied": 1.0,
+      "partial": 0.5,
+      "missing": 0.0,
+      "unknown": 0.0
+    },
+    "excluded": [
+      "not_applicable",
+      "review_mode == manual"
+    ],
+    "note": "Legacy arithmetic retained unchanged for continuity."
+  },
+  "known_defects": [
+    "Original run_ollama never set num_ctx; Ollama truncated the prompt at its 4096-token default so every review silently fell back to keyword matching.",
+    "unknown and missing carry the same weight (0.0), so honest uncertainty scored as confirmed noncompliance.",
+    "extract_docs_index matched a Vite-minified symbol, so a portal rebuild silently reduced the checklist refresh to zero docs.",
+    "check_absent_term read a 600-character preview rather than stored content."
+  ]
+}

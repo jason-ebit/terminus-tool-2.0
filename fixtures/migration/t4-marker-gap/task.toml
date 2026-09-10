@@ -1,0 +1,36 @@
+schema_version = "1.1"
+
+artifacts = ["/app/app.py"]
+
+[task]
+name = "terminal-bench/t4-marker-gap"
+description = ""
+authors = [{ name = "Fixture Author", email = "fixture@example.org" }]
+
+[metadata]
+author_name = "Fixture Author"
+author_email = "fixture@example.org"
+category = "Software"
+subcategory = "Systems"
+tags = ["migration-fixture", "python"]
+expert_time_estimate_hours = 1.0
+# T3 requires these four as metadata fields; T4 reads them from README sections.
+difficulty = "medium"
+solution_explanation = "Replace the misspelled word in /app/app.py."
+verification_explanation = "Runs /app/app.py and compares stdout byte for byte."
+relevant_experience = "Test fixture for checker policy migration."
+
+[verifier]
+timeout_sec = 120.0
+environment_mode = "separate"
+
+[agent]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0
+network_mode = "public"

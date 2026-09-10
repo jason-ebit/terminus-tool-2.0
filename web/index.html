@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Terminus ZIP Checklist</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace">
+        <header class="topbar">
+          <div class="brand">
+            <p class="eyebrow">Terminus Task Reviewer</p>
+            <h1>Checklist Builder And ZIP Checker</h1>
+          </div>
+          <div class="model-control">
+            <span class="model-label">Ollama model</span>
+            <output id="modelInput" class="model-pill" title="Fixed for now; a larger model is a future upgrade">qwen2.5:3b</output>
+          </div>
+        </header>
+
+        <nav class="source-strip" aria-label="Policy sources">
+          <span class="strip-label">Sources</span>
+          <div id="sourceList" class="source-list">Loading…</div>
+        </nav>
+
+        <div id="profileBar" class="profile-bar" role="group" aria-label="Policy profile" hidden></div>
+
+        <section class="card updates-card" aria-labelledby="changelogTitle">
+          <header class="updates-head">
+            <div class="updates-title">
+              <p class="eyebrow">Project Updates</p>
+              <div class="title-row">
+                <h2 id="changelogTitle">Loading…</h2>
+                <button id="generateBtn" class="update-pill" type="button" aria-describedby="updatedAt">
+                  <span>update</span>
+                  <svg class="loop-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 11a8 8 0 0 0-14.6-4.5M4 4v4.5h4.5M4 13a8 8 0 0 0 14.6 4.5M20 20v-4.5h-4.5" />
+                  </svg>
+                </button>
+                <span id="updatedAt" class="updated-at"></span>
+              </div>
+              <p id="changelogNote" class="changelog-note"></p>
+            </div>
+            <a id="changelogLink" class="head-link" href="#" target="_blank" rel="noreferrer">Open changes ↗</a>
+          </header>
+          <div class="updates-grid">
+            <section class="updates-col">
+              <h3>Latest Changes</h3>
+              <div id="changelogList" class="changelog-list empty">Loading changes…</div>
+              <div id="policyStatus" class="status-tables"></div>
+            </section>
+            <section class="updates-col">
+              <h3>Category Status</h3>
+              <div id="categoryStatus" class="status-tables empty">Loading category status…</div>
+            </section>
+          </div>
+        </section>
+
+        <section id="dropzone" class="card dropzone" data-state="idle" aria-live="polite">
+          <label class="drop-target" for="zipInput">
+            <input id="zipInput" type="file" accept=".zip,application/zip" class="visually-hidden" />
+            <span class="drop-idle">
+              <svg class="zip-icon" viewBox="0 0 48 56" aria-hidden="true">
+                <path class="zip-sheet" d="M6 2h26l12 12v38a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+                <path class="zip-fold" d="M32 2v12h12" />
+                <path class="zip-teeth" d="M20 8h4M20 14h4M20 20h4M20 26h4M22 11h4M22 17h4M22 23h4" />
+                <rect class="zip-pull" x="18" y="30" width="10" height="12" rx="2" />
+                <text x="24" y="50" text-anchor="middle">.zip</text>
+              </svg>
+              <strong>Drop a task <b class="accent">.zip</b> here</strong>
+              <span class="drop-hint">or <u>browse</u>. It is reviewed automatically under the selected profile.</span>
+            </span>
+            <span class="drop-busy">
+              <span class="spinner" aria-hidden="true"></span>
+              <strong id="busyTitle">Reviewing…</strong>
+              <span id="busyDetail" class="drop-hint"></span>
+            </span>
+            <span class="drop-done">
+              <svg class="tick" viewBox="0 0 52 52" aria-hidden="true">
+                <circle cx="26" cy="26" r="24" />
+                <path d="M15 27l7 7 15-16" />
+              </svg>
+              <strong id="doneTitle">Review completed</strong>
+              <span id="doneDetail" class="drop-hint"></span>
+            </span>
+            <span class="drop-error">
+              <svg class="cross" viewBox="0 0 52 52" aria-hidden="true">
+                <circle cx="26" cy="26" r="24" />
+                <path d="M18 18l16 16M34 18L18 34" />
+              </svg>
+              <strong>Review failed</strong>
+              <span id="errorDetail" class="drop-hint"></span>
+            </span>
+          </label>
+          <div class="drop-actions">
+            <button id="reviewAgainBtn" class="text-button" type="button" hidden>Review again?</button>
+          </div>
+        </section>
+
+        <p id="status" class="status" role="status">Checklist is loading.</p>
+
+        <article class="card panel">
+          <div class="panel-header">
+            <h2>Checklist</h2>
+            <span id="checklistCount">0 items</span>
+          </div>
+
+          <section id="scoreCard" class="score-card" data-state="empty">
+            <div class="score-empty">
+              <strong class="not-checked">Not checked</strong>
+              <span>Upload a task <b class="accent">.zip</b> above and it is reviewed automatically.</span>
+            </div>
+            <div class="score-filled">
+              <div class="score-head">
+                <span id="scoreValue" class="score-value">–</span>
+                <span id="stateBadge" class="state-badge">Review required</span>
+              </div>
+              <p class="score-caption">
+                <span id="scoreCaption">Legacy experimental score, for reference only. It is not a policy decision; the state beside it is.</span>
+                <small id="scoreFormula" class="score-formula"></small>
+              </p>
+              <div id="layerCards" class="layer-cards"></div>
+              <div class="score-foot">
+                <span id="scoreMeta" class="score-meta"></span>
+                <span id="reportActions" class="report-actions" hidden>
+                  <button id="copyReportBtn" class="small-button" type="button">Copy report</button>
+                  <button id="downloadReportBtn" class="small-button" type="button">Download TXT</button>
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <div id="checklistTools" class="checklist-tools" hidden>
+            <div class="filter-chips" role="group" aria-label="Filter checklist">
+              <button data-filter="all" class="chip active" type="button">All</button>
+              <button data-filter="attention" class="chip" type="button">Needs attention</button>
+              <button data-filter="failing" class="chip" type="button">Failed</button>
+              <button data-filter="rubric" class="chip" type="button">Rubric flags</button>
+              <button data-filter="advisory" class="chip" type="button">Advisory</button>
+              <button data-filter="passed" class="chip" type="button">Passed</button>
+            </div>
+            <button id="expandAllBtn" class="small-button ghost" type="button">Collapse all</button>
+          </div>
+          <div id="checklist" class="checklist empty">No checklist yet.</div>
+        </article>
+      </section>
+    </main>
+
+    <div id="updateModal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h2 id="modalTitle">Checklist update</h2>
+          <button id="closeModalBtn" class="small-button" type="button" aria-label="Close update summary">Close</button>
+        </div>
+        <div id="modalBody" class="modal-body"></div>
+      </div>
+    </div>
+    <script src="/review-guard.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

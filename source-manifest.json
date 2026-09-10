@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-09-10T08:38:13.785377+00:00",
+  "sources": [
+    {
+      "source_id": "t4-task-template",
+      "version": "T4",
+      "url": "https://raw.githubusercontent.com/harbor-framework/terminal-bench/main/docs/task-template.toml",
+      "local_path": "C:\\Users\\acer\\Documents\\GitHub\\terminal-bench\\docs\\task-template.toml",
+      "title": "Task template",
+      "retrieved_at": "2026-09-10T08:38:13.234520+00:00",
+      "content_sha256": "e118a38de9ce7e3c6e8a06da1dfaeb211ce173e480298487381eb427c370c38d",
+      "authority": "normative",
+      "status": "verified"
+    },
+    {
+      "source_id": "t4-implementation-rubric",
+      "version": "T4",
+      "url": "https://raw.githubusercontent.com/harbor-framework/terminal-bench/main/docs/prompts/task-implementation.toml",
+      "local_path": "C:\\Users\\acer\\Documents\\GitHub\\terminal-bench\\docs\\prompts\\task-implementation.toml",
+      "title": "Implementation rubric (35 criteria)",
+      "retrieved_at": "2026-09-10T08:38:13.235030+00:00",
+      "content_sha256": "9e6aa64bc57fb7bb66e5caefe942da2959e4def91831e8e292b96efec26adb58",
+      "authority": "normative",
+      "status": "verified"
+    },
+    {
+      "source_id": "t4-taxonomy",
+      "version": "T4",
+      "url": "https://raw.githubusercontent.com/harbor-framework/terminal-bench/main/docs/TAXONOMY.md",
+      "local_path": "C:\\Users\\acer\\Documents\\GitHub\\terminal-bench\\docs\\TAXONOMY.md",
+      "title": "Taxonomy: domains and subdomains",
+      "retrieved_at": "2026-09-10T08:38:13.235464+00:00",
+      "content_sha256": "dcf73719362d039638abf789319bb4b20786d7ba4c47d7fe4ca2eecf1a93727a",
+      "authority": "normative",
+      "status": "verified"
+    },
+    {
+      "source_id": "t4-reviewing",
+      "version": "T4",
+      "url": "https://raw.githubusercontent.com/harbor-framework/terminal-bench/main/docs/REVIEWING.md",
+      "local_path": "C:\\Users\\acer\\Documents\\GitHub\\terminal-bench\\docs\\REVIEWING.md",
+      "title": "Reviewing tasks",
+      "retrieved_at": "2026-09-10T08:38:13.235921+00:00",
+      "content_sha256": "d54be319d4fa152f91ae75674568c41111eb33722baf2c529bb93baed7463ac8",
+      "authority": "normative",
+      "status": "verified"
+    },
+    {
+      "source_id": "t4-review-automation",
+      "version": "T4",
+      "url": "https://raw.githubusercontent.com/harbor-framework/terminal-bench/main/docs/TASK_REVIEW_AUTOMATION.md",
+      "local_path": "C:\\Users\\acer\\Documents\\GitHub\\terminal-bench\\docs\\TASK_REVIEW_AUTOMATION.md",
+      "title": "Review automation and static checks",
+      "retrieved_at": "2026-09-10T08:38:13.236298+00:00",
+      "content_sha256": "c19fe79f59d50cb3962434d2dbc315f548fa811c4a42ded07aefe608e61a3e39",
+      "authority": "normative",
+      "status": "verified"
+    },
+    {
+      "source_id": "t4-contributing",
+      "version": "T4",
+      "url": "https://raw.githubusercontent.com/harbor-framework/terminal-bench/main/CONTRIBUTING.md",
+      "local_path": "C:\\Users\\acer\\Documents\\GitHub\\terminal-bench\\CONTRIBUTING.md",
+      "title": "Contributing guide",
+      "retrieved_at": "2026-09-10T08:38:13.236737+00:00",
+      "content_sha256": "721b0459484ee87db524bfd47bfd9ba099b0b9b4b1560846ddb48c1e5e109d70",
+      "authority": "normative",
+      "status": "verified"
+    },
+    {
+      "source_id": "t4-static-checks",
+      "version": "T4",
+      "url": "https://raw.githubusercontent.com/harbor-framework/terminal-bench/main/scripts/checks",
+      "local_path": "C:\\Users\\acer\\Documents\\GitHub\\terminal-bench\\scripts\\checks",
+      "title": "Executable static checks (22 scripts)",
+      "retrieved_at": "2026-09-10T08:38:13.785121+00:00",
+      "content_sha256": "cd959241399da06315a12bd183ee4e8fbcb49fb7b7d686bd6f89ef12bb115512",
+      "authority": "normative",
+      "status": "verified",
+      "policy_revision": "v4.0.0-22-g83c7a617",
+      "policy_sha": "83c7a6172d629c6575b785ab12c8db787bb2e323"
+    },
+    {
+      "source_id": "t3-portal-docs",
+      "version": "T3",
+      "url": "https://snorkel-ai.github.io/Terminus-EC-Training-stateful/docs/understanding-tasks/task-requirements.md",
+      "local_path": null,
+      "title": "Task requirements",
+      "retrieved_at": "2026-09-10T08:38:13.785335+00:00",
+      "content_sha256": null,
+      "authority": "normative",
+      "status": "verified-remote",
+      "note": "Live portal document; hashed at fetch time by the checklist refresh."
+    },
+    {
+      "source_id": "t3-portal-checklist",
+      "version": "T3",
+      "url": "https://snorkel-ai.github.io/Terminus-EC-Training-stateful/docs/submitting-tasks/submission-checklist.md",
+      "local_path": null,
+      "title": "Submission checklist",
+      "retrieved_at": "2026-09-10T08:38:13.785343+00:00",
+      "content_sha256": null,
+      "authority": "normative",
+      "status": "verified-remote",
+      "note": "Live portal document; hashed at fetch time by the checklist refresh."
+    },
+    {
+      "source_id": "t3-portal-difficulty",
+      "version": "T3",
+      "url": "https://snorkel-ai.github.io/Terminus-EC-Training-stateful/docs/understanding-tasks/difficulty-guidelines.md",
+      "local_path": null,
+      "title": "Difficulty guidelines",
+      "retrieved_at": "2026-09-10T08:38:13.785348+00:00",
+      "content_sha256": null,
+      "authority": "normative",
+      "status": "verified-remote",
+      "note": "Live portal document; hashed at fetch time by the checklist refresh."
+    }
+  ]
+}

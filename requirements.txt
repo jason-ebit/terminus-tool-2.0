@@ -1,0 +1,4 @@
+# No third-party Python packages are required.
+#
+# This project uses only the Python standard library. For summary/checklist
+# features, install Ollama separately so the `ollama` CLI is available on PATH.
